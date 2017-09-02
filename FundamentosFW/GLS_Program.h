@@ -10,7 +10,6 @@ private:
 	GLuint _programID;
 	GLuint _fragmentShaderID;
 	GLuint _vertexShaderID;
-
 	void compileShader(const string& shaderPath, GLuint id);
 
 public:
@@ -18,6 +17,7 @@ public:
 	~GLS_Program();
 	int _numAtribute;
 	void addAtribute(const string atributeName);
+	GLuint getUniformLocation(const string &name);
 	void use();
 	void unuse();
 	void compileShaders(const string& vertexShaderFilePath, 

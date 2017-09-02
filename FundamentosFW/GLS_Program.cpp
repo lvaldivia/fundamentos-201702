@@ -108,6 +108,15 @@ void GLS_Program::compileShader(const string& shaderPath, GLuint id) {
 }
 
 
+GLuint GLS_Program::getUniformLocation(const string &name) {
+	GLuint location = glGetUniformLocation(_programID, 
+											name.c_str());
+	if (location == GL_INVALID_INDEX) {
+		fatalError("Uniform " + name +" was not found");
+	}
+	return location;
+}
+
 GLS_Program::~GLS_Program()
 {
 }

@@ -20,7 +20,7 @@ private:
 	Sprite _sprite;
 	void procesInput();
 	GLS_Program _program;
-	
+	float _time;
 public:
 	MainGame();
 	~MainGame();

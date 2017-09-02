@@ -27,12 +27,17 @@ void MainGame::init() {
 void MainGame::initShaders() {
 	_program.compileShaders("Shaders/ColorShaderVert.txt",
 		"Shaders/ColorShaderFrag.txt");
+	_program.addAtribute("vertexPosition");
+	_program.linkShader();
 }
 
 
 void MainGame::draw() {
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	_program.use();
+	_sprite.draw();
+	_program.unuse();
 	SDL_GL_SwapWindow(_window);
 }
 

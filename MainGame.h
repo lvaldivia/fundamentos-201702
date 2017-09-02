@@ -8,7 +8,7 @@ enum class GameState {
 	PLAY, EXIT
 };
 
-class MainGame{
+class MainGame {
 private:
 	int _width;
 	int _height;
@@ -26,4 +26,3 @@ public:
 	void draw();
 	void update();
 };
-

@@ -4,9 +4,9 @@
 
 using namespace std;
 
-MainGame::MainGame() : _window(nullptr), 
-						_width(800),_height(600),
-						_gameState(GameState::PLAY)
+MainGame::MainGame() : _window(nullptr),
+_width(800), _height(600),
+_gameState(GameState::PLAY)
 {
 }
 
@@ -29,7 +29,7 @@ void MainGame::init() {
 }
 
 void MainGame::initShaders() {
-	
+
 }
 
 void MainGame::update() {

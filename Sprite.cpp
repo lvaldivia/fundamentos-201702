@@ -25,11 +25,11 @@ void Sprite::init(float x, float y,
 	vertexdata[1].setPosition(_x, _y + _height);
 	vertexdata[2].setPosition(_x, _y);
 	vertexdata[3].setPosition(_x, _y);
-	vertexdata[4].setPosition(_x+_width, _y);
-	vertexdata[5].setPosition(_x + _width, _y+_height);
+	vertexdata[4].setPosition(_x + _width, _y);
+	vertexdata[5].setPosition(_x + _width, _y + _height);
 
 	glBindBuffer(GL_ARRAY_BUFFER, _vobID);
-	glBufferData(GL_ARRAY_BUFFER,sizeof(vertexdata),vertexdata,GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertexdata), vertexdata, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
@@ -38,8 +38,8 @@ void Sprite::draw() {
 	glEnableVertexAttribArray(0);
 
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE,
-		sizeof(Vertex), (void*)offsetof(Vertex, 
-							position));
+		sizeof(Vertex), (void*)offsetof(Vertex,
+			position));
 	glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE,
 		GL_TRUE, sizeof(Vertex),
 		(void*)offsetof(Vertex, color));

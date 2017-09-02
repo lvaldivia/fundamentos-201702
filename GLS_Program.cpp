@@ -15,8 +15,8 @@ void GLS_Program::compileShader(
 		fileContent += line + "\n";
 	}
 	shaderFile.close();
-	const char* contents = 
-			fileContent.c_str();
+	const char* contents =
+		fileContent.c_str();
 	glShaderSource(id, 1, &contents, nullptr);
 	glCompileShader(id);
 
@@ -31,7 +31,7 @@ void GLS_Program::compileShader(
 		std::vector<GLchar> errorLog(maxLength);
 		glGetShaderInfoLog(id, maxLength, &maxLength, &errorLog[0]);
 		fatalError("Shaders not compiled " +
-					printf("%s", &(errorLog[0])));
+			printf("%s", &(errorLog[0])));
 		// Provide the infolog in whatever manor you deem best.
 		// Exit with failure.
 		glDeleteShader(id); // Don't leak the shader.
@@ -64,7 +64,7 @@ void GLS_Program::compileShaders(
 ) {
 	_programID = glCreateProgram();
 
-	_vertexShaderID = 
+	_vertexShaderID =
 		glCreateShader(GL_VERTEX_SHADER);
 	if (_vertexShaderID == 0) {
 		fatalError("VertexShader was not created");
@@ -74,10 +74,10 @@ void GLS_Program::compileShaders(
 	if (_fragmentShaderID == 0) {
 		fatalError("FragmentShader was not created");
 	}
-	compileShader(vertexShaderFilePath, 
-					_vertexShaderID);
+	compileShader(vertexShaderFilePath,
+		_vertexShaderID);
 	compileShader(fragmentShaderFilePath,
-					_fragmentShaderID);
+		_fragmentShaderID);
 }
 
 
@@ -112,10 +112,10 @@ void GLS_Program::linkShader() {
 
 
 }
-GLS_Program::GLS_Program(): _programID(0),
-					_fragmentShaderID(0), 
-					_vertexShaderID(0),
-					_numAttribute(0)
+GLS_Program::GLS_Program() : _programID(0),
+_fragmentShaderID(0),
+_vertexShaderID(0),
+_numAttribute(0)
 {
 }
 

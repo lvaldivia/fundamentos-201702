@@ -40,10 +40,10 @@ void GLS_Program::compileShader(
 
 }
 
-
 void GLS_Program::addAttribute() {
 
 }
+
 void GLS_Program::use() {
 	for (int i = 0; i < _numAttribute; i++)
 	{

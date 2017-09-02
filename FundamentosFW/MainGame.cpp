@@ -17,7 +17,7 @@ void MainGame::init() {
 	
 	GLenum error = glewInit();
 	if (error != GLEW_OK) {
-
+		
 	}
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
@@ -25,7 +25,8 @@ void MainGame::init() {
 }
 
 void MainGame::initShaders() {
-
+	_program.compileShaders("Shaders/ColorShaderVert.txt",
+		"Shaders/ColorShaderFrag.txt");
 }
 
 

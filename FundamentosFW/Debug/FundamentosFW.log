@@ -1,5 +1,9 @@
-﻿  MainGame.cpp
+﻿  Sprite.cpp
+  MainGame.cpp
+  main.cpp
   GLS_Program.cpp
+  Error.cpp
   Generating Code...
-  FundamentosFW.vcxproj -> C:\Users\Luis\Documents\Visual Studio 2015\Projects\FR\FundamentosFW\Debug\FundamentosFW.exe
-  FundamentosFW.vcxproj -> C:\Users\Luis\Documents\Visual Studio 2015\Projects\FR\FundamentosFW\Debug\FundamentosFW.pdb (Partial PDB)
+  LINK : C:\Users\Proyecto\Documents\funda\Debug\FundamentosFW.exe not found or not built by the last incremental link; performing full link
+  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\funda\Debug\FundamentosFW.exe
+  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\funda\Debug\FundamentosFW.pdb (Partial PDB)

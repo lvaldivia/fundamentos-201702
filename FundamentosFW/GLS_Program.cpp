@@ -113,12 +113,21 @@ GLS_Program::~GLS_Program()
 }
 
 void GLS_Program::addAtribute(const string atributeName) {
-
+	glBindAttribLocation(_programID,
+		_numAtribute++,atributeName.c_str());
 }
 
 void GLS_Program::use() {
-
+	glUseProgram(_programID);
+	for (int i = 0; i < _numAtribute; i++)
+	{
+		glEnableVertexAttribArray(i);
+	}
 }
 void GLS_Program::unuse(){
-
+	glUseProgram(0);
+	for (int i = 0; i < _numAtribute; i++)
+	{
+		glDisableVertexAttribArray(i);
+	}
 }

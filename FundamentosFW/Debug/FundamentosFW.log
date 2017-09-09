@@ -1,5 +1,5 @@
-﻿  MainGame.cpp
-c:\users\proyecto\documents\funda\fundamentosfw\maingame.cpp(42): warning C4305: '+=': truncation from 'double' to 'float'
-cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
+﻿  ImageLoader.cpp
+c:\users\proyecto\documents\funda\fundamentosfw\imageloader.cpp(38): warning C4244: '=': conversion from 'unsigned long' to 'float', possible loss of data
+c:\users\proyecto\documents\funda\fundamentosfw\imageloader.cpp(39): warning C4244: '=': conversion from 'unsigned long' to 'float', possible loss of data
   FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\funda\Debug\FundamentosFW.exe
   FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\funda\Debug\FundamentosFW.pdb (Partial PDB)

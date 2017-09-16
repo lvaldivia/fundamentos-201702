@@ -12,18 +12,8 @@ void MainGame::run() {
 void MainGame::init() {
 
 	SDL_Init(SDL_INIT_EVERYTHING);
-	_window = SDL_CreateWindow("Clases :D", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _witdh, _height, SDL_WINDOW_OPENGL);
-	if (_window == nullptr) {
-	}
-
-	SDL_GLContext glContext = SDL_GL_CreateContext(_window);
-	
-	GLenum error = glewInit();
-	if (error != GLEW_OK) {
-		
-	}
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-	glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+	_window.create(
+			"Hola :D", _witdh, _height, 0);
 	initShaders();
 }
 
@@ -56,7 +46,7 @@ void MainGame::draw() {
 	}
 	//_sprite.draw();
 	_program.unuse();
-	SDL_GL_SwapWindow(_window);
+	_window.swapWindow();
 }
 
 void MainGame::procesInput() {
@@ -85,7 +75,7 @@ void MainGame::update() {
 }
 
 
-MainGame::MainGame() : _window(nullptr), 
+MainGame::MainGame() :  
 						_witdh(800),_height(600),
 						_gameState(GameState::PLAY),
 						_time(0)

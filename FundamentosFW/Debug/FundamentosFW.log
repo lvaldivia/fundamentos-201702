@@ -1,5 +1,2 @@
-﻿  ImageLoader.cpp
-c:\users\proyecto\documents\funda\fundamentosfw\imageloader.cpp(38): warning C4244: '=': conversion from 'unsigned long' to 'float', possible loss of data
-c:\users\proyecto\documents\funda\fundamentosfw\imageloader.cpp(39): warning C4244: '=': conversion from 'unsigned long' to 'float', possible loss of data
-  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\funda\Debug\FundamentosFW.exe
-  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\funda\Debug\FundamentosFW.pdb (Partial PDB)
+﻿  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\fundamentos-201702\Debug\FundamentosFW.exe
+  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\fundamentos-201702\Debug\FundamentosFW.pdb (Partial PDB)

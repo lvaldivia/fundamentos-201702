@@ -29,8 +29,8 @@ private:
 	float _time;
 	void processInput();
 	void handleInput();
-	const float CAMERA_SPEED = 0.5f;
-	const float SCALE_SPEED = 0.1f;
+	const float CAMERA_SPEED = 0.05f;
+	const float SCALE_SPEED = 0.01f;
 
 public:
 	MainGame();

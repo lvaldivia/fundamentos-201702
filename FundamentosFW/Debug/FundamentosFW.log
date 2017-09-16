@@ -1,7 +1,5 @@
-﻿  MainGame.cpp
-c:\users\proyecto\documents\fundamentos-201702\fundamentosfw\maingame.cpp(99): warning C4244: 'argument': conversion from 'Sint32' to 'float', possible loss of data
+﻿  SpriteBatch.cpp
+  Level.cpp
   Generating Code...
-  Skipping... (no relevant changes detected)
-  main.cpp
-  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\fundamentos-201702\Debug\FundamentosFW.exe
-  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\fundamentos-201702\Debug\FundamentosFW.pdb (Partial PDB)
+  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\funda\Debug\FundamentosFW.exe
+  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\funda\Debug\FundamentosFW.pdb (Partial PDB)

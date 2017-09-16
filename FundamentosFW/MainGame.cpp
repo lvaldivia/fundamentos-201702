@@ -2,19 +2,24 @@
 #include "Sprite.h"
 #include <iostream>
 #include <glm\glm.hpp>
+#include "Engine.h"
+
 using namespace std;
+using namespace Papu;
 
 void MainGame::run() {
 	init();
 	_sprites.push_back(new Sprite());
-	_sprites.back()->init(-1, -1, 1, 1, "Images/imagen.png");
+	
+	_sprites.back()->init(0.0f,0.0f, _witdh/2, _height/2, "Images/imagen.png");
 	_sprites.push_back(new Sprite());
-	_sprites.back()->init(0, -1, 1, 1, "Images/imagen.png");
+	_sprites.back()->init(_witdh / 2, _height / 2, 
+						_witdh / 2, _height / 2, "Images/imagen.png");
 	update();
 }
 void MainGame::init() {
 
-	SDL_Init(SDL_INIT_EVERYTHING);
+	Papu::init();
 	_window.create(
 			"Hola :D", _witdh, _height, 0);
 	initShaders();
@@ -44,6 +49,7 @@ void MainGame::draw() {
 
 	glm::mat4 cameraMatrix = _camera2D.getCameraMatrix();
 	glUniformMatrix4fv(pLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
+
 	GLuint imageLocation = _program.getUniformLocation("image");
 	glUniform1i(imageLocation, 0);
 
@@ -57,31 +63,28 @@ void MainGame::draw() {
 
 void MainGame::handleInput() {
 	if (_inputManager.isKeyPressed(SDLK_w)) {
-		cout << "arriba" << endl;
+		
 		_camera2D.setPosition(_camera2D.getPosition()
 			+ glm::vec2(0.0, -CAMERA_SPEED));
-		cout << _camera2D.getPosition().x << _camera2D.getPosition().y << endl;
 	}
 	if (_inputManager.isKeyPressed(SDLK_s)) {
-		cout << "abajo" << endl;
 		_camera2D.setPosition(_camera2D.getPosition()
 			+ glm::vec2(0.0, CAMERA_SPEED));
-		cout << _camera2D.getPosition().x << _camera2D.getPosition().y << endl;
 	}
 	if (_inputManager.isKeyPressed(SDLK_a)) {
-		cout << "izquierda" << endl;
 		_camera2D.setPosition(_camera2D.getPosition()
 			+ glm::vec2(CAMERA_SPEED, 0.0));
-		cout <<  _camera2D.getPosition().x << _camera2D.getPosition().y << endl;
 	}
 	if (_inputManager.isKeyPressed(SDLK_d)) {
-		cout << "derecha" << endl;
 		_camera2D.setPosition(_camera2D.getPosition()
 			+ glm::vec2(-CAMERA_SPEED, 0.0));
-		cout << _camera2D.getPosition().x << _camera2D.getPosition().y << endl;
 	}
-	if (_inputManager.isKeyPressed(SDLK_q)) {}
-	if (_inputManager.isKeyPressed(SDLK_e)) {}
+	if (_inputManager.isKeyPressed(SDLK_q)) {
+		_camera2D.setScale(_camera2D.getScale() + SCALE_SPEED);
+	}
+	if (_inputManager.isKeyPressed(SDLK_e)) {
+		_camera2D.setScale(_camera2D.getScale() - SCALE_SPEED);
+	}
 }
 
 void MainGame::processInput() {

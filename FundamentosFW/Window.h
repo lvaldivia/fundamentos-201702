@@ -23,11 +23,11 @@ public:
 	void swapWindow();
 	int getScreenWidth() 
 	{ 
-		_screenWidth; 
+		return _screenWidth; 
 	}
 	int getScreenHeight() 
 	{
-		_screenHeigth;
+		return _screenHeigth;
 	}
 	int create(string windowName,
 		int screenWidth,

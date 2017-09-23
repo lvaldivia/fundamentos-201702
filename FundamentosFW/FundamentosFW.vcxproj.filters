@@ -66,6 +66,15 @@
     <ClInclude Include="SpriteBatch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Agent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Zombie.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Human.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GLS_Program.cpp">
@@ -114,6 +123,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SpriteBatch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Agent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Zombie.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Human.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

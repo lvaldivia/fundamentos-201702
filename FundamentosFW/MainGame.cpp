@@ -15,6 +15,12 @@ void MainGame::run() {
 	_player = new Player();
 	_player->init(1.0f, _levels[_currentLevel]->getPlayerPosition(),
 			&_inputManager);
+
+	for (size_t i = 0; i < _levels[_currentLevel]->getZombiesPosition().size(); i++)
+	{
+		_zombies.push_back(new Zombie());
+		_zombies.back()->init(1.0f,_levels[_currentLevel]->getZombiesPosition()[i]);
+	}
 	/*_sprites.push_back(new Sprite());
 	
 	_sprites.back()->init(0.0f,0.0f, _witdh/2, _height/2, "Images/imagen.png");
@@ -62,6 +68,10 @@ void MainGame::draw() {
 	_spriteBacth.begin();
 	_levels[_currentLevel]->draw();
 	_player->draw(_spriteBacth);
+	for (size_t i = 0; i < _zombies.size(); i++)
+	{
+		_zombies[i]->draw(_spriteBacth);
+	}
 	_spriteBacth.end();
 	_spriteBacth.renderBatch();
 

@@ -1,4 +1,8 @@
-﻿  Window.cpp
+﻿  main.cpp
+  Zombie.cpp
+  MainGame.cpp
+c:\users\proyecto\documents\funda\fundamentosfw\maingame.cpp(125): warning C4244: 'argument': conversion from 'Sint32' to 'float', possible loss of data
+  Generating Code...
 cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
   FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\funda\Debug\FundamentosFW.exe
   FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\funda\Debug\FundamentosFW.pdb (Partial PDB)

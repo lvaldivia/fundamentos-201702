@@ -36,7 +36,7 @@ private:
 	vector<Level*> _levels;
 	vector<Human*> _humans;
 	vector<Zombie*> _zombies;
-	SpriteBatch _spriteBacth;
+	SpriteBacth _spriteBacth;
 	int _currentLevel;
 	Player* _player;
 

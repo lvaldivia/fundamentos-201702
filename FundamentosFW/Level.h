@@ -31,7 +31,7 @@ public:
 	};
 	Level(const std::string& fileName);
 	void draw();
-	SpriteBatch _spriteBatch;
+	SpriteBacth _spriteBatch;
 	~Level();
 };
 

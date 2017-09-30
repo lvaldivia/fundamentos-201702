@@ -31,7 +31,7 @@ public:
 		std::vector<Human*>& humans,
 		std::vector<Zombie*>& zombies
 	) = 0;
-	void draw(SpriteBatch& SpriteBatch);
+	void draw(SpriteBacth& SpriteBatch);
 	bool collideWithLevel(
 		const std::vector<std::string>& levelData);
 	bool collideWithAgent(Agent* agent);

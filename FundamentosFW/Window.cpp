@@ -42,7 +42,8 @@ int Window::create(string windowName,
 	if (error != GLEW_OK) {
 	}
 
-	glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+	glClearColor(0.0f, 0.0f, 1.0f, 1.0f); 
+	SDL_GL_SetSwapInterval(0);
 	return 0;
 }
 

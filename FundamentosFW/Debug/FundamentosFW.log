@@ -1,3 +1,4 @@
 ﻿  Window.cpp
-  FundamentosFW.vcxproj -> C:\Users\Luis\Documents\funda20172\Debug\FundamentosFW.exe
-  FundamentosFW.vcxproj -> C:\Users\Luis\Documents\funda20172\Debug\FundamentosFW.pdb (Partial PDB)
+cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
+  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\funda\Debug\FundamentosFW.exe
+  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\funda\Debug\FundamentosFW.pdb (Partial PDB)

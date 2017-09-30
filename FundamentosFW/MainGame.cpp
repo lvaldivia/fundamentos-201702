@@ -12,6 +12,9 @@ void MainGame::run() {
 	_levels.push_back(new Level("Levels/level1.txt"));
 	_currentLevel = 0;
 	_spriteBacth.init();
+	_player = new Player();
+	_player->init(1.0f, _levels[_currentLevel]->getPlayerPosition(),
+			&_inputManager);
 	/*_sprites.push_back(new Sprite());
 	
 	_sprites.back()->init(0.0f,0.0f, _witdh/2, _height/2, "Images/imagen.png");
@@ -58,30 +61,36 @@ void MainGame::draw() {
 
 	_spriteBacth.begin();
 	_levels[_currentLevel]->draw();
+	_player->draw(_spriteBacth);
 	_spriteBacth.end();
 	_spriteBacth.renderBatch();
 
 	_program.unuse();
+
 	_window.swapWindow();
+}
+
+void MainGame::updateElements() {
+	_player->update();
 }
 
 void MainGame::handleInput() {
 	if (_inputManager.isKeyPressed(SDLK_w)) {
 		
-		_camera2D.setPosition(_camera2D.getPosition()
-			+ glm::vec2(0.0, -CAMERA_SPEED));
+		/*_camera2D.setPosition(_camera2D.getPosition()
+			+ glm::vec2(0.0, -CAMERA_SPEED));*/
 	}
 	if (_inputManager.isKeyPressed(SDLK_s)) {
-		_camera2D.setPosition(_camera2D.getPosition()
-			+ glm::vec2(0.0, CAMERA_SPEED));
+		/*_camera2D.setPosition(_camera2D.getPosition()
+			+ glm::vec2(0.0, CAMERA_SPEED));*/
 	}
 	if (_inputManager.isKeyPressed(SDLK_a)) {
-		_camera2D.setPosition(_camera2D.getPosition()
-			+ glm::vec2(CAMERA_SPEED, 0.0));
+		/*_camera2D.setPosition(_camera2D.getPosition()
+			+ glm::vec2(CAMERA_SPEED, 0.0));*/
 	}
 	if (_inputManager.isKeyPressed(SDLK_d)) {
-		_camera2D.setPosition(_camera2D.getPosition()
-			+ glm::vec2(-CAMERA_SPEED, 0.0));
+		/*_camera2D.setPosition(_camera2D.getPosition()
+			+ glm::vec2(-CAMERA_SPEED, 0.0));*/
 	}
 	if (_inputManager.isKeyPressed(SDLK_q)) {
 		_camera2D.setScale(_camera2D.getScale() + SCALE_SPEED);
@@ -122,7 +131,9 @@ void MainGame::update() {
 	while (_gameState != GameState::EXIT) {
 		processInput();
 		draw();
+		updateElements();
 		_camera2D.update();
+		_camera2D.setPosition(_player->getPosition());
 		
 	}
 }
@@ -131,7 +142,8 @@ void MainGame::update() {
 MainGame::MainGame() :  
 						_witdh(800),_height(600),
 						_gameState(GameState::PLAY),
-						_time(0)
+						_time(0),
+						_player(nullptr)
 				
 {
 	_camera2D.init(_witdh, _height);

@@ -39,6 +39,7 @@ private:
 	SpriteBacth _spriteBacth;
 	int _currentLevel;
 	Player* _player;
+	void updateElements();
 
 	void handleInput();
 	const float CAMERA_SPEED = 0.05f;

@@ -11,6 +11,13 @@ struct Color {
 	GLubyte g;
 	GLubyte b;
 	GLubyte a;
+
+	void set(GLubyte _r, GLubyte _g, GLubyte _b, GLubyte _a) {
+		r = _r;
+		g = _g;
+		b = _b;
+		a = _a;
+	}
 };
 
 struct UV

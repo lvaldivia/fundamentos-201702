@@ -1,2 +1,4 @@
-﻿  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\funda\Debug\FundamentosFW.exe
-  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\funda\Debug\FundamentosFW.pdb (Partial PDB)
+﻿  MainGame.cpp
+c:\users\proyecto\documents\fundamentos-201702\fundamentosfw\maingame.cpp(106): warning C4244: 'argument': conversion from 'Sint32' to 'float', possible loss of data
+  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\fundamentos-201702\Debug\FundamentosFW.exe
+  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\fundamentos-201702\Debug\FundamentosFW.pdb (Partial PDB)

@@ -9,12 +9,15 @@ using namespace Papu;
 
 void MainGame::run() {
 	init();
-	_sprites.push_back(new Sprite());
+	_levels.push_back(new Level("Levels/level1.txt"));
+	_currentLevel = 0;
+	_spriteBacth.init();
+	/*_sprites.push_back(new Sprite());
 	
 	_sprites.back()->init(0.0f,0.0f, _witdh/2, _height/2, "Images/imagen.png");
 	_sprites.push_back(new Sprite());
 	_sprites.back()->init(_witdh / 2, _height / 2, 
-						_witdh / 2, _height / 2, "Images/imagen.png");
+						_witdh / 2, _height / 2, "Images/imagen.png");*/
 	update();
 }
 void MainGame::init() {
@@ -53,10 +56,11 @@ void MainGame::draw() {
 	GLuint imageLocation = _program.getUniformLocation("image");
 	glUniform1i(imageLocation, 0);
 
-	for (size_t i = 0; i < _sprites.size(); i++)
-	{
-		_sprites[i]->draw();
-	}
+	_spriteBacth.begin();
+	_levels[_currentLevel]->draw();
+	_spriteBacth.end();
+	_spriteBacth.renderBatch();
+
 	_program.unuse();
 	_window.swapWindow();
 }

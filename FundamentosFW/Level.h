@@ -23,6 +23,12 @@ public:
 	std::vector<glm::vec2> getZombiesPosition()const {
 		return _zombiesPosition;
 	};
+	int getWidth() const {
+		return _levelData[0].size();
+	};
+	int getHeight() const {
+		return _levelData[0].size();
+	};
 	Level(const std::string& fileName);
 	void draw();
 	SpriteBatch _spriteBatch;

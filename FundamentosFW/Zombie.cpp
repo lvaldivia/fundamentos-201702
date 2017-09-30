@@ -4,8 +4,12 @@
 
 Zombie::Zombie()
 {
+
 }
 
+void Zombie::update(){
+
+}
 
 Zombie::~Zombie()
 {

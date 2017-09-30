@@ -34,6 +34,7 @@ public:
 	void draw(SpriteBatch& SpriteBatch);
 	bool collideWithLevel(
 		const std::vector<std::string>& levelData);
-	~Agent();
+	bool collideWithAgent(Agent* agent);
+	virtual ~Agent();
 };
 

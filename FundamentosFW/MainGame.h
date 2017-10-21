@@ -11,6 +11,7 @@
 #include "Human.h"
 #include "Zombie.h"
 #include "Player.h"
+#include "Bullet.h"
 #include "Level.h"
 
 enum class GameState
@@ -24,9 +25,7 @@ class MainGame
 private:
 	int _witdh;
 	int _height;
-	//SDL_Window* _window;
 	void init();
-	//vector<Sprite*> _sprites;
 	Camera2D _camera2D;
 	InputManager _inputManager;
 	Window _window;
@@ -39,6 +38,7 @@ private:
 	SpriteBacth _spriteBacth;
 	int _currentLevel;
 	Player* _player;
+	vector<Bullet*> _bullets;
 	void updateElements();
 
 	void handleInput();

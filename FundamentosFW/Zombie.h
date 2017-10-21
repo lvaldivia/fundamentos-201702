@@ -11,6 +11,7 @@ public:
 		std::vector<Zombie*>& zombies);
 	Zombie();
 	~Zombie();
-	void update();
+
+	Human* getNearestHuma(std::vector<Human*>& humans);
 };
 

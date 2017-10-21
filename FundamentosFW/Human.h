@@ -3,7 +3,10 @@
 
 class Human : public Agent
 {
+private:
+	glm::vec2 _direction;
 public:
+	void init(float speed, glm::vec2 position);
 	Human();
 	~Human();
 	void update(

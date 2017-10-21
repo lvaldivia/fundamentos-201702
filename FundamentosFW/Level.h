@@ -29,6 +29,13 @@ public:
 	int getHeight() const {
 		return _levelData[0].size();
 	};
+	const std::vector<std::string>& getLevelData() {
+		return _levelData;
+	};
+
+	int getNumHumans() {
+		return _numHumas;
+	}
 	Level(const std::string& fileName);
 	void draw();
 	SpriteBacth _spriteBatch;

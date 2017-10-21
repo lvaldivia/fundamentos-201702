@@ -47,6 +47,17 @@ void GLS_Program::linkShader() {
 	glDeleteShader(_fragmentShaderID);
 }
 
+GLuint GLS_Program::getUniformLocation(const string & name)
+{
+	GLuint location = glGetUniformLocation(_programID,
+		name.c_str());
+	if (location == GL_INVALID_INDEX) {
+		fatalError("Uniform " + name + " not found in shader");
+	}
+	return location;
+}
+
+
 
 void GLS_Program::compileShaders(const string& vertexShaderFilePath,
 	const string& fragmentShaderFilePath) {
@@ -108,22 +119,14 @@ void GLS_Program::compileShader(const string& shaderPath, GLuint id) {
 }
 
 
-GLuint GLS_Program::getUniformLocation(const string &name) {
-	GLuint location = glGetUniformLocation(_programID, 
-											name.c_str());
-	if (location == GL_INVALID_INDEX) {
-		fatalError("Uniform " + name +" was not found");
-	}
-	return location;
-}
-
 GLS_Program::~GLS_Program()
 {
 }
 
 void GLS_Program::addAtribute(const string atributeName) {
-	glBindAttribLocation(_programID,
-		_numAtribute++,atributeName.c_str());
+	glBindAttribLocation(_programID, 
+						_numAtribute++, 
+						atributeName.c_str());
 }
 
 void GLS_Program::use() {

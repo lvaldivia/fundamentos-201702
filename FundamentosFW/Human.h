@@ -3,16 +3,16 @@
 
 class Human : public Agent
 {
-private:
+
+protected:
 	glm::vec2 _direction;
 public:
-	void init(float speed, glm::vec2 position);
 	Human();
 	~Human();
-	void update(
-		const std::vector<std::string>& levelData,
+	void init(float speed, glm::vec2 position);
+
+	void update(const std::vector<std::string>& levelData,
 		std::vector<Human*>& humans,
-		std::vector<Zombie*>& zombies
-	);
+		std::vector<Zombie*>& zombies);
 };
 

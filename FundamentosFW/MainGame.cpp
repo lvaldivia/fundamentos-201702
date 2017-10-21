@@ -1,66 +1,64 @@
 #include "MainGame.h"
-#include "Sprite.h"
+#include "ImageLoader.h"
 #include <iostream>
-#include <glm\glm.hpp>
-#include "Engine.h"
+#include "ResourceManager.h"
+#include "PapuEngine.h"
 #include <random>
 #include <ctime>
 
 using namespace std;
-using namespace Papu;
 
 void MainGame::run() {
 	init();
-	_levels.push_back(new Level("Levels/level1.txt"));
-	_currentLevel = 0;
-	_spriteBacth.init();
-	_player = new Player();
-	_player->init(0.2f, _levels[_currentLevel]->getPlayerPosition(),
-			&_inputManager);
-	_humans.push_back(_player);
-
-	int numHumas = _levels[_currentLevel]->getNumHumans();
-
-	std::mt19937 randonEngne(time(nullptr));
-
-	std::uniform_int_distribution<int>randPosX(
-		1, 20
-	);
-
-	std::uniform_int_distribution<int>randPosY(
-		1,20
-	);
-
-	for (int i = 0; i < numHumas; i++)
-	{
-		_humans.push_back(new Human());
-		glm::vec2 pos(randPosX(randonEngne) * TITLE_WIDTH,
-			randPosY(randonEngne) * TITLE_WIDTH
-		);
-		_humans.back()->init(0.02f, pos);
-	}
-
-	for (size_t i = 0; i < _levels[_currentLevel]->getZombiesPosition().size(); i++)
-	{
-		_zombies.push_back(new Zombie());
-		_zombies.back()->init(0.02f,_levels[_currentLevel]->getZombiesPosition()[i]);
-	}
 	update();
 }
-void MainGame::init() {
 
+void MainGame::init() {
 	Papu::init();
-	_window.create(
-			"Hola :D", _witdh, _height, 0);
+	_window.create("Engine", _witdh, _height, 0);
+	glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
+	initLevel();
 	initShaders();
 }
 
+void MainGame::initLevel() {
+	_levels.push_back(new Level("Levels/level1.txt"));
+	_player = new Player();
+	_currenLevel = 0;
+	_player->init(1.0f, _levels[_currenLevel]->getPlayerPosition(), &_inputManager);
+	_humans.push_back(_player);
+	_spriteBacth.init();
+
+	std::mt19937 randomEngine(time(nullptr));
+	std::uniform_int_distribution<int>randPosX(
+		1, _levels[_currenLevel]->getWidth()-2);
+	std::uniform_int_distribution<int>randPosY(
+		1, _levels[_currenLevel]->getHeight()-2);
+
+	for (size_t i = 0; i < _levels[_currenLevel]->getNumHumans(); i++)
+	{
+		_humans.push_back(new Human());
+		glm::vec2 pos(randPosX(randomEngine)*TILE_WIDTH, 
+							randPosY(randomEngine)*TILE_WIDTH);
+		_humans.back()->init(1.0f, pos);
+	}
+
+	const std::vector<glm::vec2>& zombiePosition =
+		_levels[_currenLevel]->getZombiesPosition();
+
+	for (size_t i = 0; i < zombiePosition.size(); i++)
+	{
+		_zombies.push_back(new Zombie());
+		_zombies.back()->init(0.03f, zombiePosition[i]);
+	}
+}
+
 void MainGame::initShaders() {
-	_program.compileShaders("Shaders/ColorShaderVert.txt",
-		"Shaders/ColorShaderFrag.txt");
+	_program.compileShaders("Shaders/colorShaderVert.txt",
+		"Shaders/colorShaderFrag.txt");
 	_program.addAtribute("vertexPosition");
 	_program.addAtribute("vertexColor");
-	_program.addAtribute("verxtexUV");
+	_program.addAtribute("vertexUV");
 	_program.linkShader();
 }
 
@@ -69,27 +67,26 @@ void MainGame::draw() {
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	_program.use();
+
 	glActiveTexture(GL_TEXTURE0);
+	//glBindTexture(GL_TEXTURE_2D, _texture.id);
 
-	GLuint timeLocation = _program.getUniformLocation("time");
-	glUniform1f(timeLocation, _time);
-	_time += 0.0002f;
+	/*GLuint timeLocation = 
+		_program.getUniformLocation("time");
 
-	GLuint pLocation = _program.getUniformLocation("P");
+	glUniform1f(timeLocation,_time);*/
 
-	glm::mat4 cameraMatrix = _camera2D.getCameraMatrix();
-	glUniformMatrix4fv(pLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
+	GLuint pLocation =
+		_program.getUniformLocation("P");
 
-	GLuint imageLocation = _program.getUniformLocation("image");
+	glm::mat4 cameraMatrix = _camera.getCameraMatrix();
+	glUniformMatrix4fv(pLocation, 1,GL_FALSE, &(cameraMatrix[0][0]));
+
+	GLuint imageLocation = _program.getUniformLocation("myImage");
 	glUniform1i(imageLocation, 0);
 
 	_spriteBacth.begin();
-	_levels[_currentLevel]->draw();
-
-	for (size_t i = 0; i < _bullets.size(); i++)
-	{
-		_bullets[i]->draw(_spriteBacth);
-	}
+	_levels[_currenLevel]->draw();
 
 	for (size_t i = 0; i < _humans.size(); i++)
 	{
@@ -100,45 +97,20 @@ void MainGame::draw() {
 	{
 		_zombies[i]->draw(_spriteBacth);
 	}
+
 	_spriteBacth.end();
 	_spriteBacth.renderBatch();
 
+	glBindTexture(GL_TEXTURE_2D, 0);
+
 	_program.unuse();
-
-	_window.swapWindow();
+	_window.swapBuffer();
 }
 
-void MainGame::updateElements() {
-
-	for (size_t i = 0; i < _bullets.size(); i++)
-	{
-		_bullets[i]->update(_humans, _zombies);
-	}
-
-	for (size_t i = 0; i < _humans.size(); i++)
-	{
-		_humans[i]->update(_levels[_currentLevel]->getLevelData(),
-							_humans, _zombies);
-	}
-
-	for (size_t i = 0; i < _zombies.size(); i++)
-	{
-		_zombies[i]->update(
-			_levels[_currentLevel]->getLevelData(), _humans, _zombies);
-	}
-}
-
-void MainGame::handleInput() {
-	if (_inputManager.isKeyPressed(SDLK_q)) {
-		_camera2D.setScale(_camera2D.getScale() + SCALE_SPEED);
-	}
-	if (_inputManager.isKeyPressed(SDLK_e)) {
-		_camera2D.setScale(_camera2D.getScale() - SCALE_SPEED);
-	}
-}
-
-void MainGame::processInput() {
+void MainGame::procesInput() {
 	SDL_Event event;
+	const float CAMERA_SPEED = 20.0f;
+	const float SCALE_SPEED = 0.1f;
 	while (SDL_PollEvent(&event))
 	{
 		switch (event.type)
@@ -147,43 +119,77 @@ void MainGame::processInput() {
 				_gameState = GameState::EXIT;
 				break;
 			case SDL_MOUSEMOTION:
-				_inputManager.setMouseCoords(
-					event.motion.x, event.motion.y
-				);
+				_inputManager.setMouseCoords(event.motion.x,event.motion.y);
 			break;
-			case SDL_KEYDOWN:
-				_inputManager.pressKey(
-					event.key.keysym.sym);
+			case  SDL_KEYUP:
+				_inputManager.releaseKey(event.key.keysym.sym);
 				break;
-			case SDL_KEYUP:
-				_inputManager.releaseKey(
-					event.key.keysym.sym);
+			case  SDL_KEYDOWN:
+				_inputManager.pressKey(event.key.keysym.sym);
+				break;
+			case SDL_MOUSEBUTTONDOWN:
+				_inputManager.pressKey(event.button.button);
+				break;
+			case SDL_MOUSEBUTTONUP:
+				_inputManager.releaseKey(event.button.button);
 				break;
 		}
+		if (_inputManager.isKeyPressed(SDLK_q)) {
+			_camera.setScale(_camera.getScale() + SCALE_SPEED);
+		}
+		if (_inputManager.isKeyPressed(SDLK_e)) {
+			_camera.setScale(_camera.getScale() - SCALE_SPEED);
+		}
+		if (_inputManager.isKeyPressed(SDL_BUTTON_LEFT)) {
+			glm::vec2 mouseCoords =  _camera.convertScreenToWorl(_inputManager.getMouseCoords());
+			cout << mouseCoords.x << " " << mouseCoords.y << endl;
+
+			glm::vec2 playerPosition(0, 0);
+
+			glm::vec2 direction = mouseCoords - playerPosition;
+			direction = glm::normalize(direction);
+			_bullets.emplace_back(playerPosition, direction, 1.0f,1000);
+		}
 	}
-	handleInput();
 }
 
 void MainGame::update() {
+
 	while (_gameState != GameState::EXIT) {
-		processInput();
+		procesInput();
 		draw();
-		updateElements();
-		_camera2D.update();
-		_camera2D.setPosition(_player->getPosition());
+		_camera.update();
+		_time += 0.002f;
+		updateAgents();
+		_camera.setPosition(_player->getPosition());
+	}
+}
+
+void MainGame::updateAgents() {
+	for (size_t i = 0; i < _humans.size(); i++)
+	{
+		_humans[i]->update(_levels[_currenLevel]->getLevelData(),
+			_humans,_zombies);
+	}
+
+	for (size_t i = 0; i < _zombies.size(); i++)
+	{
+		_zombies[i]->update(_levels[_currenLevel]->getLevelData(),
+			_humans, _zombies);
+
+
 		
 	}
 }
 
-
-MainGame::MainGame() :  
-						_witdh(800),_height(600),
-						_gameState(GameState::PLAY),
-						_time(0),
-						_player(nullptr)
-				
+MainGame::MainGame(): 
+					  _witdh(800),
+					  _height(600),
+					  _gameState(GameState::PLAY),
+					  _time(0),
+					  _player(nullptr)
 {
-	_camera2D.init(_witdh, _height);
+	_camera.init(_witdh, _height);
 }
 
 

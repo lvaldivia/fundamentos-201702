@@ -1,6 +1,7 @@
 #include "Level.h"
-#include "ResourceManager.h"
 #include <fstream>
+#include "ResourceManager.h"
+#include "Error.h"
 
 
 Level::Level(const std::string& fileName)
@@ -8,58 +9,64 @@ Level::Level(const std::string& fileName)
 	std::ifstream file;
 	file.open(fileName);
 	if (file.fail()) {
-		
+		fatalError("failed to opem " + fileName);
 	}
 	std::string tmp;
-	file >> tmp >> _numHumas;
 
-	while (std::getline(file,tmp)) {
+	file >> tmp >> _numHumans;
+
+	std::getline(file, tmp);
+	while (std::getline(file, tmp)) {
 		_levelData.push_back(tmp);
 	}
 	parseLevel();
+
+}
+
+void Level::draw() {
+	_spriteBatch.renderBatch();
 }
 
 
 void Level::parseLevel() {
 	_spriteBatch.init();
 	_spriteBatch.begin();
+
+	glm::vec4 uvRect(0.0f, 0.0f, 1.0f, 1.0f);
 	Color color;
 	color.set(255, 255, 255, 255);
-	glm::vec4 uvRect(0.0f, 0.0f, 1.0f, 1.0f);
-	for (size_t y = 0; y < _levelData.size(); y++)
+	for (int y = 0; y < _levelData.size(); y++)
 	{
-		for (size_t x = 0; x < _levelData[y].size(); x++)
+		for (int x = 0; x < _levelData[y].size(); x++)
 		{
 			char tile = _levelData[y][x];
-			glm::vec4 destRect(
-				x*TITLE_WIDTH, y*TITLE_WIDTH,
-				TITLE_WIDTH, TITLE_WIDTH);
+			glm::vec4 destRect(x*TILE_WIDTH, y*TILE_WIDTH,
+							   TILE_WIDTH, TILE_WIDTH);
 			switch (tile)
 			{
 			case 'R':
 			case 'B':
-				_spriteBatch.draw(destRect, uvRect,
-					ResourceManager::getTexture("Images/red_bricks.png").id,
-					0.0f, color);
+				_spriteBatch.draw(destRect, uvRect, 
+					ResourceManager::getTexture("Textures/red_bricks.png").id
+					,0.0f,color);
 				break;
 			case 'G':
 				_spriteBatch.draw(destRect, uvRect,
-					ResourceManager::getTexture("Images/red_bricks.png").id,
-					0.0f, color);
+					ResourceManager::getTexture("Textures/glass.png").id
+					, 0.0f, color);
 				break;
-			case 'L':
-				_spriteBatch.draw(destRect, uvRect,
-					ResourceManager::getTexture("Images/red_bricks.png").id,
-					0.0f, color);
+			case 'L':_spriteBatch.draw(destRect, uvRect,
+				ResourceManager::getTexture("Textures/light_bricks.png").id
+				, 0.0f, color);				
 				break;
 			case '@':
 				_levelData[y][x] = '.';
-				_playerPosition.x = x*TITLE_WIDTH;
-				_playerPosition.y = y*TITLE_WIDTH;
+				_playerPosition.x = x*TILE_WIDTH;
+				_playerPosition.y = y*TILE_WIDTH;
 				break;
-			case'Z':
+			case 'Z':
 				_levelData[y][x] = '.';
-				_zombiesPosition.emplace_back(x*TITLE_WIDTH, y*TITLE_WIDTH);
+				_zombiesPosition.emplace_back(x*TILE_WIDTH, y*TILE_WIDTH);
 				break;
 			case '.':
 				break;
@@ -71,10 +78,6 @@ void Level::parseLevel() {
 	_spriteBatch.end();
 }
 
-
-void Level::draw() {
-	_spriteBatch.renderBatch();
-}
 
 Level::~Level()
 {

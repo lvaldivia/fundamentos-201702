@@ -1,22 +1,19 @@
 #pragma once
-#include <glm\glm.hpp>
-#include "SpriteBatch.h"
-#include "Agent.h"
-
-const int BULLET_RADIUS = 5;
-
-class Bullet : public Agent
+#include <glm/glm.hpp>
+#include "SpriteBacth.h"
+class Bullet
 {
-private :
+private:
+	float _speed;
 	glm::vec2 _direction;
-	float _damage;
-
+	glm::vec2 _position;
+	int _lifeTime;
 public:
-	Bullet(glm::vec2 position, glm::vec2 direction,		
-					float damage, float _speed);
-	void draw(SpriteBacth& spriteBatch);
-	void update(std::vector<Human*> &humans,
-		std::vector<Zombie*> &zombies);
+	Bullet(glm::vec2 po, glm::vec2 dir, float speed, int lifeTime);
 	~Bullet();
+	//void init(glm::vec2 po,glm::vec2 dir,float speed, int lifeTime);
+	void draw(SpriteBacth& spriteBatch);
+	bool update();
+
 };
 

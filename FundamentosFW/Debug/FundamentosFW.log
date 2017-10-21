@@ -1,6 +1,3 @@
-﻿  Human.cpp
-c:\users\proyecto\documents\fundamentos-201702\fundamentosfw\human.cpp(15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\proyecto\documents\fundamentos-201702\fundamentosfw\human.cpp(31): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
-  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\fundamentos-201702\Debug\FundamentosFW.exe
-  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\fundamentos-201702\Debug\FundamentosFW.pdb (Partial PDB)
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (PapuEngine.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  FundamentosFW.vcxproj -> C:\Users\Luis\Documents\fundamentos-201702\Debug\FundamentosFW.exe
+  FundamentosFW.vcxproj -> C:\Users\Luis\Documents\fundamentos-201702\Debug\FundamentosFW.pdb (Partial PDB)

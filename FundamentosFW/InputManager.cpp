@@ -1,29 +1,29 @@
 #include "InputManager.h"
 
+void InputManager::pressKey(unsigned int keyCode) {
+	_keyMap[keyCode] = true;
+}
 
+void InputManager::releaseKey(unsigned int keyCode) {
+	_keyMap[keyCode] = false;
 
-InputManager::InputManager():_mouseCoords(0.0f,0.0f)
-{
+}
+bool InputManager::isKeyPressed(unsigned int keyCode) {
+	auto it = _keyMap.find(keyCode);
+	if (it != _keyMap.end()) {
+		return it->second;
+	}
+	return false;
 }
 
 void InputManager::setMouseCoords(float x, float y) {
 	_mouseCoords.x = x;
 	_mouseCoords.y = y;
 }
-void InputManager::pressKey(unsigned int keyCode) {
-	_keys[keyCode] = true;
-}
-void InputManager::releaseKey(unsigned int keyCode) {
-	_keys[keyCode] = false;
-}
-bool InputManager::isKeyPressed(unsigned int keyCode) {
-	auto it = _keys.find(keyCode);
-	if (it != _keys.end()) {
-		return it->second;
-	}
-	return false;
-}
 
+InputManager::InputManager():_mouseCoords(0.0f,0.0f)
+{
+}
 
 
 InputManager::~InputManager()

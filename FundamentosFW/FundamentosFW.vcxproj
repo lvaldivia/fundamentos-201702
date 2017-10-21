@@ -124,6 +124,7 @@
     <ClInclude Include="Error.h" />
     <ClInclude Include="GLS_Program.h" />
     <ClInclude Include="GLTexture.h" />
+    <ClInclude Include="Gun.h" />
     <ClInclude Include="Human.h" />
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="InputManager.h" />
@@ -148,6 +149,7 @@
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="GLS_Program.cpp" />
+    <ClCompile Include="Gun.cpp" />
     <ClCompile Include="Human.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="InputManager.cpp" />

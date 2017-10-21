@@ -49,7 +49,7 @@ void MainGame::initLevel() {
 	for (size_t i = 0; i < zombiePosition.size(); i++)
 	{
 		_zombies.push_back(new Zombie());
-		_zombies.back()->init(0.03f, zombiePosition[i]);
+		_zombies.back()->init(0.3f, zombiePosition[i]);
 	}
 }
 
@@ -166,6 +166,10 @@ void MainGame::update() {
 }
 
 void MainGame::updateAgents() {
+
+
+
+
 	for (size_t i = 0; i < _humans.size(); i++)
 	{
 		_humans[i]->update(_levels[_currenLevel]->getLevelData(),
@@ -176,6 +180,33 @@ void MainGame::updateAgents() {
 	{
 		_zombies[i]->update(_levels[_currenLevel]->getLevelData(),
 			_humans, _zombies);
+
+		for (size_t x = 0; x < _zombies.size(); x++)
+		{
+			_zombies[i]->collideWithAgent(_zombies[x]);
+		}
+
+		if (_zombies[i]->collideWithAgent(_player)) {
+			
+		}
+		else {
+			for (size_t j = 0; j < _humans.size(); j++)
+			{
+
+				if (_zombies[i]->collideWithAgent(_humans[j])) {
+
+					_zombies.push_back(new Zombie);
+
+					_zombies.back()->init(0.3f,
+						_humans[j]->getPosition());
+					delete _humans[j];
+					_humans[j] = _humans.back();
+					_humans.pop_back();
+				}
+			}
+		}
+
+		
 
 
 		

@@ -2,8 +2,9 @@
 
 
 
-Weapon::Weapon()
+Weapon::Weapon(std::string name)
 {
+	_name = name;
 }
 
 

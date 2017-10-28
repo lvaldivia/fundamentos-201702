@@ -8,8 +8,8 @@ class Gun
 {
 public:
 	std::string _name;
-	Gun(std::string name, int fireRate, 
-		int bulletsPershot, float bulletDamage,
+	Gun(std::string name, int fireRate,
+		int bulletsPershot, float spread, float bulletDamage,
 		float bulletSpeed);
 	~Gun();
 	void update(bool isMouseDown,
@@ -20,6 +20,7 @@ public:
 	);
 
 private:
+	float _frameCounter;
 	void fire(const glm::vec2& direction,
 		const glm::vec2& position,
 		std::vector<Bullet>& bullets);

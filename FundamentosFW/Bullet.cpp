@@ -6,6 +6,7 @@
 #include "Human.h"
 #include "Zombie.h"
 #include "Level.h"
+#include <iostream>
 
 
 void Bullet::draw(SpriteBacth& spriteBatch) {
@@ -38,8 +39,8 @@ bool Bullet::collideWithWorld(
 
 bool Bullet::update(const std::vector<std::string>& levelData,
 	float deltaTime) {
-	_position += _direction * _speed * deltaTime;
-	return false;
+	_position += _speed * deltaTime;
+	return collideWithWorld(levelData);
 }
 
 bool Bullet::collideWithAgent(Agent* agent) {

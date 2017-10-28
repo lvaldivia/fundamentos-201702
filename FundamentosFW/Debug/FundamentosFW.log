@@ -1,64 +1,8 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (PapuEngine.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  main.cpp
-  MainGame.cpp
-c:\users\proyecto\documents\fundamentos-201702\fundamentosfw\maingame.cpp(35): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\proyecto\documents\fundamentos-201702\fundamentosfw\maingame.cpp(125): warning C4244: 'argument': conversion from 'Sint32' to 'float', possible loss of data
-c:\users\proyecto\documents\fundamentos-201702\fundamentosfw\maingame.cpp(180): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
-c:\program files (x86)\microsoft visual studio 14.0\vc\include\xmemory0(737): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xmemory0(857): note: see reference to function template instantiation 'void std::allocator<_Ty>::construct<_Objty,glm::vec2&,glm::vec2&,float,int>(_Objty *,glm::vec2 &,glm::vec2 &,float &&,int &&)' being compiled
-          with
-          [
-              _Ty=Bullet,
-              _Objty=Bullet
-          ]
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xmemory0(857): note: see reference to function template instantiation 'void std::allocator<_Ty>::construct<_Objty,glm::vec2&,glm::vec2&,float,int>(_Objty *,glm::vec2 &,glm::vec2 &,float &&,int &&)' being compiled
-          with
-          [
-              _Ty=Bullet,
-              _Objty=Bullet
-          ]
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xmemory0(996): note: see reference to function template instantiation 'void std::allocator_traits<_Alloc>::construct<_Ty,glm::vec2&,glm::vec2&,float,int>(std::allocator<_Ty> &,_Objty *,glm::vec2 &,glm::vec2 &,float &&,int &&)' being compiled
-          with
-          [
-              _Alloc=std::allocator<Bullet>,
-              _Ty=Bullet,
-              _Objty=Bullet
-          ]
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xmemory0(995): note: see reference to function template instantiation 'void std::allocator_traits<_Alloc>::construct<_Ty,glm::vec2&,glm::vec2&,float,int>(std::allocator<_Ty> &,_Objty *,glm::vec2 &,glm::vec2 &,float &&,int &&)' being compiled
-          with
-          [
-              _Alloc=std::allocator<Bullet>,
-              _Ty=Bullet,
-              _Objty=Bullet
-          ]
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\vector(930): note: see reference to function template instantiation 'void std::_Wrap_alloc<std::allocator<_Ty>>::construct<_Ty,glm::vec2&,glm::vec2&,float,int>(_Ty *,glm::vec2 &,glm::vec2 &,float &&,int &&)' being compiled
-          with
-          [
-              _Ty=Bullet
-          ]
-  c:\program files (x86)\microsoft visual studio 14.0\vc\include\vector(929): note: see reference to function template instantiation 'void std::_Wrap_alloc<std::allocator<_Ty>>::construct<_Ty,glm::vec2&,glm::vec2&,float,int>(_Ty *,glm::vec2 &,glm::vec2 &,float &&,int &&)' being compiled
-          with
-          [
-              _Ty=Bullet
-          ]
-  c:\users\proyecto\documents\fundamentos-201702\fundamentosfw\maingame.cpp(152): note: see reference to function template instantiation 'void std::vector<Bullet,std::allocator<_Ty>>::emplace_back<glm::vec2&,glm::vec2&,float,int>(glm::vec2 &,glm::vec2 &,float &&,int &&)' being compiled
-          with
-          [
-              _Ty=Bullet
-          ]
-  c:\users\proyecto\documents\fundamentos-201702\fundamentosfw\maingame.cpp(152): note: see reference to function template instantiation 'void std::vector<Bullet,std::allocator<_Ty>>::emplace_back<glm::vec2&,glm::vec2&,float,int>(glm::vec2 &,glm::vec2 &,float &&,int &&)' being compiled
-          with
-          [
-              _Ty=Bullet
-          ]
-  Gun.cpp
-c:\users\proyecto\documents\fundamentos-201702\fundamentosfw\gun.cpp(17): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\proyecto\documents\fundamentos-201702\fundamentosfw\gun.cpp(36): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Bullet.cpp
-c:\users\proyecto\documents\fundamentos-201702\fundamentosfw\bullet.cpp(29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\proyecto\documents\fundamentos-201702\fundamentosfw\bullet.cpp(30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\proyecto\documents\fundamentos-201702\fundamentosfw\bullet.cpp(32): warning C4018: '>=': signed/unsigned mismatch
-c:\users\proyecto\documents\fundamentos-201702\fundamentosfw\bullet.cpp(33): warning C4018: '>=': signed/unsigned mismatch
-  Generating Code...
-  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\fundamentos-201702\Debug\FundamentosFW.exe
-  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\fundamentos-201702\Debug\FundamentosFW.pdb (Partial PDB)
+c:\users\proyecto\documents\funda\fundamentosfw\bullet.cpp(30): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\proyecto\documents\funda\fundamentosfw\bullet.cpp(31): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\proyecto\documents\funda\fundamentosfw\bullet.cpp(33): warning C4018: '>=': signed/unsigned mismatch
+c:\users\proyecto\documents\funda\fundamentosfw\bullet.cpp(34): warning C4018: '>=': signed/unsigned mismatch
+  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\funda\Debug\FundamentosFW.exe
+  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\funda\Debug\FundamentosFW.pdb (Partial PDB)

@@ -9,6 +9,10 @@
 
 using namespace std;
 
+const float HUMAN_SPEED = 1.0f;
+const float ZOMBIE_SPEED = 1.3f;
+const float PLAYER_SPEED = 5.0f;
+
 void MainGame::run() {
 	init();
 	update();
@@ -28,7 +32,12 @@ void MainGame::initLevel() {
 	_levels.push_back(new Level("Levels/level1.txt"));
 	_player = new Player();
 	_currenLevel = 0;
-	_player->init(1.0f, _levels[_currenLevel]->getPlayerPosition(), &_inputManager);
+	_player->init(PLAYER_SPEED, 
+		_levels[_currenLevel]->getPlayerPosition(), 
+		&_inputManager,
+		&_camera,
+		&_bullets);
+
 	_humans.push_back(_player);
 	_spriteBacth.init();
 
@@ -43,7 +52,7 @@ void MainGame::initLevel() {
 		_humans.push_back(new Human());
 		glm::vec2 pos(randPosX(randomEngine)*TILE_WIDTH, 
 							randPosY(randomEngine)*TILE_WIDTH);
-		_humans.back()->init(1.0f, pos);
+		_humans.back()->init(HUMAN_SPEED, pos);
 	}
 
 	const std::vector<glm::vec2>& zombiePosition =
@@ -52,8 +61,10 @@ void MainGame::initLevel() {
 	for (size_t i = 0; i < zombiePosition.size(); i++)
 	{
 		_zombies.push_back(new Zombie());
-		_zombies.back()->init(2.0f, zombiePosition[i]);
+		_zombies.back()->init(ZOMBIE_SPEED, zombiePosition[i]);
 	}
+
+	_player->addGun(new Gun("Magnum", 10, 1, 5.0f, 30, 0.001f));
 }
 
 void MainGame::initShaders() {
@@ -90,6 +101,11 @@ void MainGame::draw() {
 
 	_spriteBacth.begin();
 	_levels[_currenLevel]->draw();
+
+	for (size_t i = 0; i < _bullets.size(); i++)
+	{
+		_bullets[i].draw(_spriteBacth);
+	}
 
 	for (size_t i = 0; i < _humans.size(); i++)
 	{
@@ -145,7 +161,6 @@ void MainGame::procesInput() {
 		}
 		if (_inputManager.isKeyPressed(SDL_BUTTON_LEFT)) {
 			glm::vec2 mouseCoords =  _camera.convertScreenToWorl(_inputManager.getMouseCoords());
-			cout << mouseCoords.x << " " << mouseCoords.y << endl;
 			glm::vec2 playerPosition(0, 0);
 			glm::vec2 direction = mouseCoords - playerPosition;
 			direction = glm::normalize(direction);
@@ -188,13 +203,18 @@ void MainGame::gameLoop() {
 									MAX_DELTA_TIME);
 		totalDeltime -= deltaTime;
 		updateAgents(deltaTime);
-		std::cout << deltaTime << endl;
 		i++;
 	}
 	_fps = _fpsLimiter.end();
 }
 
 void MainGame::updateAgents(float totalDeltime) {
+	for (size_t i = 0; i < _bullets.size(); i++)
+	{
+		_bullets[i].update(_levels[_currenLevel]->getLevelData()
+			, totalDeltime);
+	}
+
 	for (size_t i = 0; i < _humans.size(); i++)
 	{
 		_humans[i]->update(_levels[_currenLevel]->getLevelData(),
@@ -218,7 +238,7 @@ void MainGame::updateAgents(float totalDeltime) {
 			{
 				if (_zombies[i]->collideWithAgent(_humans[j])) {
 					_zombies.push_back(new Zombie);
-					_zombies.back()->init(2.0f,
+					_zombies.back()->init(ZOMBIE_SPEED,
 						_humans[j]->getPosition());
 					delete _humans[j];
 					_humans[j] = _humans.back();

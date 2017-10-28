@@ -4,6 +4,7 @@
 #include "ResourceManager.h"
 #include "PapuEngine.h"
 #include <random>
+#include <algorithm>
 #include <ctime>
 
 using namespace std;
@@ -14,6 +15,8 @@ void MainGame::run() {
 }
 
 void MainGame::init() {
+	_fps = 0;
+	_previusTicks = 0;
 	Papu::init();
 	_window.create("Engine", _witdh, _height, 0);
 	glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
@@ -35,7 +38,7 @@ void MainGame::initLevel() {
 	std::uniform_int_distribution<int>randPosY(
 		1, _levels[_currenLevel]->getHeight()-2);
 
-	for (size_t i = 0; i < _levels[_currenLevel]->getNumHumans(); i++)
+	for (int i = 0; i < _levels[_currenLevel]->getNumHumans(); i++)
 	{
 		_humans.push_back(new Human());
 		glm::vec2 pos(randPosX(randomEngine)*TILE_WIDTH, 
@@ -49,7 +52,7 @@ void MainGame::initLevel() {
 	for (size_t i = 0; i < zombiePosition.size(); i++)
 	{
 		_zombies.push_back(new Zombie());
-		_zombies.back()->init(0.3f, zombiePosition[i]);
+		_zombies.back()->init(2.0f, zombiePosition[i]);
 	}
 }
 
@@ -143,9 +146,7 @@ void MainGame::procesInput() {
 		if (_inputManager.isKeyPressed(SDL_BUTTON_LEFT)) {
 			glm::vec2 mouseCoords =  _camera.convertScreenToWorl(_inputManager.getMouseCoords());
 			cout << mouseCoords.x << " " << mouseCoords.y << endl;
-
 			glm::vec2 playerPosition(0, 0);
-
 			glm::vec2 direction = mouseCoords - playerPosition;
 			direction = glm::normalize(direction);
 			_bullets.emplace_back(playerPosition, direction, 1.0f,1000);
@@ -160,26 +161,50 @@ void MainGame::update() {
 		draw();
 		_camera.update();
 		_time += 0.002f;
-		updateAgents();
-		_camera.setPosition(_player->getPosition());
+		gameLoop();
 	}
 }
 
-void MainGame::updateAgents() {
+void MainGame::gameLoop() {
+	
+	_camera.setPosition(_player->getPosition());
+	const float DESIRED_FPS = 60.0f;
+	const float MS_PER_SECOND = 1000;
+	const float DESIRED_FRAMERATE = 
+							MS_PER_SECOND / DESIRED_FPS;
+	const float MAX_DELTA_TIME = 1.0f;
+	const int MAX_PHYSICS_STEP = 6;
 
+	_fpsLimiter.setMaxFPS(60000.0f);
+	_fpsLimiter.begin();
+	float newTicks = SDL_GetTicks();
+	float frameTime = newTicks - _previusTicks;
+	_previusTicks = newTicks;
+	float totalDeltime = frameTime / DESIRED_FRAMERATE;
+	int i = 0;
+	while (totalDeltime > 0.0f && i < MAX_PHYSICS_STEP)
+	{
+		float deltaTime = std::min(totalDeltime, 
+									MAX_DELTA_TIME);
+		totalDeltime -= deltaTime;
+		updateAgents(deltaTime);
+		std::cout << deltaTime << endl;
+		i++;
+	}
+	_fps = _fpsLimiter.end();
+}
 
-
-
+void MainGame::updateAgents(float totalDeltime) {
 	for (size_t i = 0; i < _humans.size(); i++)
 	{
 		_humans[i]->update(_levels[_currenLevel]->getLevelData(),
-			_humans,_zombies);
+			_humans,_zombies,totalDeltime);
 	}
 
 	for (size_t i = 0; i < _zombies.size(); i++)
 	{
 		_zombies[i]->update(_levels[_currenLevel]->getLevelData(),
-			_humans, _zombies);
+			_humans, _zombies, totalDeltime);
 
 		for (size_t x = 0; x < _zombies.size(); x++)
 		{
@@ -187,17 +212,13 @@ void MainGame::updateAgents() {
 		}
 
 		if (_zombies[i]->collideWithAgent(_player)) {
-			
 		}
 		else {
 			for (size_t j = 0; j < _humans.size(); j++)
 			{
-
 				if (_zombies[i]->collideWithAgent(_humans[j])) {
-
 					_zombies.push_back(new Zombie);
-
-					_zombies.back()->init(0.3f,
+					_zombies.back()->init(2.0f,
 						_humans[j]->getPosition());
 					delete _humans[j];
 					_humans[j] = _humans.back();
@@ -205,11 +226,6 @@ void MainGame::updateAgents() {
 				}
 			}
 		}
-
-		
-
-
-		
 	}
 }
 

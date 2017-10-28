@@ -10,7 +10,8 @@ void Player::init(float speed, glm::vec2 position, InputManager* inputManager) {
 }
 void Player::update(const std::vector<std::string>& levelData,
 	std::vector<Human*>& humans,
-	std::vector<Zombie*>& zombies) {
+	std::vector<Zombie*>& zombies, 
+	float deltaTime) {
 	if (_inputManager->isKeyPressed(SDLK_w)) {
 		_position.y += _speed;
 	}

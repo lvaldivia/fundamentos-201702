@@ -1,19 +1,34 @@
 #pragma once
+
 #include <glm/glm.hpp>
+#include <vector>
 #include "SpriteBacth.h"
+
+class Human;
+class Zombie;
+class Agent;
+
+const int BULLET_RADIUS = 5;
+
 class Bullet
 {
 private:
-	float _speed;
+	bool collideWithWorld(
+				const std::vector<std::string>& levelData);
 	glm::vec2 _direction;
 	glm::vec2 _position;
-	int _lifeTime;
+	float _damage;
+	float _speed;
+
 public:
-	Bullet(glm::vec2 po, glm::vec2 dir, float speed, int lifeTime);
+	Bullet(glm::vec2 position, glm::vec2 direction,
+		float damage, float speed);
 	~Bullet();
-	//void init(glm::vec2 po,glm::vec2 dir,float speed, int lifeTime);
 	void draw(SpriteBacth& spriteBatch);
-	bool update();
+	bool update(const std::vector<std::string>& levelData,
+								float deltaTime);
+	bool collideWithAgent(Agent* agent);
+	float getDamage()const { return _damage; };
 
 };
 

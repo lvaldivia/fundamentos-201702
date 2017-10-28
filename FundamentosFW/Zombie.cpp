@@ -14,14 +14,15 @@ void Zombie::init(float speed, glm::vec2 position) {
 
 void Zombie::update(const std::vector<std::string>& levelData,
 	std::vector<Human*>& humans,
-	std::vector<Zombie*>& zombies) {
+	std::vector<Zombie*>& zombies,
+	float deltaTime) {
 	collideWithLevel(levelData);
 
 	Human* closeHuman = getNearestHuman(humans);
 	if (closeHuman != nullptr) {
 		glm::vec2 direction = glm::normalize(
 				closeHuman->getPosition() - _position);
-		_position += direction*_speed;
+		_position += direction*_speed * deltaTime;
 	}
 }
 

@@ -12,6 +12,7 @@
 #include "Player.h"
 #include "Human.h"
 #include "Zombie.h"
+#include "Timing.h"
 
 enum class GameState
 {
@@ -36,14 +37,18 @@ private:
 	vector<Level*> _levels;
 	vector<Human*>  _humans;
 	vector<Zombie*> _zombies;
+	FpsLimiter _fpsLimiter;
+	void gameLoop();
+	float _previusTicks;
 	Player* _player;
 	int _currenLevel;
 	void initLevel();
-	void updateAgents();
+	void updateAgents(float deltaTime);
 	
 public:
 	MainGame();
 	~MainGame();
+	float _fps;
 	GameState _gameState;
 	void initShaders();
 	void run();

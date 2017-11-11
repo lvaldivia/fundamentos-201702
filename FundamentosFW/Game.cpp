@@ -15,7 +15,6 @@ bool Game::init() {
 	);
 	initSystems();
 	onInit(); 
-	_isRunning = true;
 	addScreens();
 	_currentScreen = _screenList->getCurrent();
 	_currentScreen->onEntry();
@@ -38,11 +37,26 @@ bool Game::initSystems() {
 }
 
 void Game::onSDLEvent(SDL_Event& event) {
-
+	switch (event.type)
+	{
+	case SDL_QUIT:
+		break;
+	case SDL_MOUSEMOTION:
+		break;
+	case SDL_KEYDOWN:
+		break;
+	case SDL_KEYUP:
+		break;
+	case SDL_MOUSEBUTTONDOWN:
+		break;
+	case SDL_MOUSEBUTTONUP:
+		break;
+	}
 }
 
 void Game::run() {
 	if (!init())return;
+	_isRunning = true;
 	while (_isRunning) {
 		_inputManager.update();
 		update();

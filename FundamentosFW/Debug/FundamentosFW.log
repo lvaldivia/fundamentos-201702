@@ -1,4 +1,4 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (PapuEngine.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  LINK : C:\Users\Proyecto\Documents\fundamentos-201702\Debug\FundamentosFW.exe not found or not built by the last incremental link; performing full link
-  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\fundamentos-201702\Debug\FundamentosFW.exe
-  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\fundamentos-201702\Debug\FundamentosFW.pdb (Partial PDB)
+  App.cpp
+  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\funda\Debug\FundamentosFW.exe
+  FundamentosFW.vcxproj -> C:\Users\Proyecto\Documents\funda\Debug\FundamentosFW.pdb (Partial PDB)

@@ -22,6 +22,7 @@ void MainGame::init() {
 	_fps = 0;
 	_previusTicks = 0;
 	Papu::init();
+	background = new Background("hola");
 	_window.create("Engine", _witdh, _height, 0);
 	glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
 	initLevel();
@@ -29,42 +30,8 @@ void MainGame::init() {
 }
 
 void MainGame::initLevel() {
-	_levels.push_back(new Level("Levels/level1.txt"));
-	_player = new Player();
-	_currenLevel = 0;
-	_player->init(PLAYER_SPEED, 
-		_levels[_currenLevel]->getPlayerPosition(), 
-		&_inputManager,
-		&_camera,
-		&_bullets);
-
-	_humans.push_back(_player);
 	_spriteBacth.init();
-
-	std::mt19937 randomEngine(time(nullptr));
-	std::uniform_int_distribution<int>randPosX(
-		1, _levels[_currenLevel]->getWidth()-2);
-	std::uniform_int_distribution<int>randPosY(
-		1, _levels[_currenLevel]->getHeight()-2);
-
-	for (int i = 0; i < _levels[_currenLevel]->getNumHumans(); i++)
-	{
-		_humans.push_back(new Human());
-		glm::vec2 pos(randPosX(randomEngine)*TILE_WIDTH, 
-							randPosY(randomEngine)*TILE_WIDTH);
-		_humans.back()->init(HUMAN_SPEED, pos);
-	}
-
-	const std::vector<glm::vec2>& zombiePosition =
-		_levels[_currenLevel]->getZombiesPosition();
-
-	for (size_t i = 0; i < zombiePosition.size(); i++)
-	{
-		_zombies.push_back(new Zombie());
-		_zombies.back()->init(ZOMBIE_SPEED, zombiePosition[i]);
-	}
-
-	_player->addGun(new Gun("Magnum", 10, 1, 5.0f, 30, 0.001f));
+	_camera.setPosition(glm::vec2(400, 300));
 }
 
 void MainGame::initShaders() {
@@ -81,14 +48,7 @@ void MainGame::draw() {
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	_program.use();
-
 	glActiveTexture(GL_TEXTURE0);
-	//glBindTexture(GL_TEXTURE_2D, _texture.id);
-
-	/*GLuint timeLocation = 
-		_program.getUniformLocation("time");
-
-	glUniform1f(timeLocation,_time);*/
 
 	GLuint pLocation =
 		_program.getUniformLocation("P");
@@ -100,28 +60,12 @@ void MainGame::draw() {
 	glUniform1i(imageLocation, 0);
 
 	_spriteBacth.begin();
-	_levels[_currenLevel]->draw();
-
-	for (size_t i = 0; i < _bullets.size(); i++)
-	{
-		_bullets[i].draw(_spriteBacth);
-	}
-
-	for (size_t i = 0; i < _humans.size(); i++)
-	{
-		_humans[i]->draw(_spriteBacth);
-	}
-
-	for (size_t i = 0; i < _zombies.size(); i++)
-	{
-		_zombies[i]->draw(_spriteBacth);
-	}
+	background->draw(_spriteBacth);
 
 	_spriteBacth.end();
 	_spriteBacth.renderBatch();
 
 	glBindTexture(GL_TEXTURE_2D, 0);
-
 	_program.unuse();
 	_window.swapBuffer();
 }
@@ -164,7 +108,6 @@ void MainGame::procesInput() {
 			glm::vec2 playerPosition(0, 0);
 			glm::vec2 direction = mouseCoords - playerPosition;
 			direction = glm::normalize(direction);
-			_bullets.emplace_back(playerPosition, direction, 1.0f,1000);
 		}
 	}
 }
@@ -181,8 +124,6 @@ void MainGame::update() {
 }
 
 void MainGame::gameLoop() {
-	
-	_camera.setPosition(_player->getPosition());
 	const float DESIRED_FPS = 60.0f;
 	const float MS_PER_SECOND = 1000;
 	const float DESIRED_FRAMERATE = 
@@ -209,52 +150,13 @@ void MainGame::gameLoop() {
 }
 
 void MainGame::updateAgents(float totalDeltime) {
-	for (size_t i = 0; i < _bullets.size(); i++)
-	{
-		_bullets[i].update(_levels[_currenLevel]->getLevelData()
-			, totalDeltime);
-	}
-
-	for (size_t i = 0; i < _humans.size(); i++)
-	{
-		_humans[i]->update(_levels[_currenLevel]->getLevelData(),
-			_humans,_zombies,totalDeltime);
-	}
-
-	for (size_t i = 0; i < _zombies.size(); i++)
-	{
-		_zombies[i]->update(_levels[_currenLevel]->getLevelData(),
-			_humans, _zombies, totalDeltime);
-
-		for (size_t x = 0; x < _zombies.size(); x++)
-		{
-			_zombies[i]->collideWithAgent(_zombies[x]);
-		}
-
-		if (_zombies[i]->collideWithAgent(_player)) {
-		}
-		else {
-			for (size_t j = 0; j < _humans.size(); j++)
-			{
-				if (_zombies[i]->collideWithAgent(_humans[j])) {
-					_zombies.push_back(new Zombie);
-					_zombies.back()->init(ZOMBIE_SPEED,
-						_humans[j]->getPosition());
-					delete _humans[j];
-					_humans[j] = _humans.back();
-					_humans.pop_back();
-				}
-			}
-		}
-	}
 }
 
 MainGame::MainGame(): 
 					  _witdh(800),
 					  _height(600),
 					  _gameState(GameState::PLAY),
-					  _time(0),
-					  _player(nullptr)
+					  _time(0)
 {
 	_camera.init(_witdh, _height);
 }

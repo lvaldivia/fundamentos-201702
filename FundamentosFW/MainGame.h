@@ -13,6 +13,7 @@
 #include "Human.h"
 #include "Zombie.h"
 #include "Timing.h"
+#include "Background.h"
 
 enum class GameState
 {
@@ -27,6 +28,7 @@ private:
 	int _height;
 	float _time;
 	Window _window;
+	Background* background;
 	void init();
 	void procesInput();
 	GLS_Program _program;

@@ -28,7 +28,6 @@ void MenuScreen::draw() {
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	_program.use();
-
 	glActiveTexture(GL_TEXTURE0);
 
 	GLuint pLocation =
@@ -41,19 +40,18 @@ void MenuScreen::draw() {
 	glUniform1i(imageLocation, 0);
 
 	_spriteBacth.begin();
-
 	_background->draw(_spriteBacth);
+
 	_spriteBacth.end();
 	_spriteBacth.renderBatch();
 
 	glBindTexture(GL_TEXTURE_2D, 0);
-
 	_program.unuse();
 }
 
 void MenuScreen::update() {
 	checkInput();
-	draw();
+	_camera2D.update();
 }
 
 void MenuScreen::initSystem() {
@@ -67,8 +65,10 @@ void MenuScreen::initSystem() {
 
 void MenuScreen::onEntry() {
 	initSystem();
+	_spriteBacth.init();
 	_camera2D.init(_window->getScreenWidth(), _window->getScreenHeight());
 	_background = new Background("hola");
+	_camera2D.setPosition(glm::vec2(400, 300));
 }
 
 void MenuScreen::checkInput() {

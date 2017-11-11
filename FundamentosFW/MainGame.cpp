@@ -22,7 +22,11 @@ void MainGame::init() {
 	_fps = 0;
 	_previusTicks = 0;
 	Papu::init();
-	background = new Background("hola");
+	background = new Background("Images/naves/menu.png");
+	_ship = new Ship(106, 79,glm::vec2(400,300), "Images/naves/Player.png");
+	_enemies.push_back(new EnemyShip(132, 84, glm::vec2(100, 100),"Images/naves/spaceShips_005.png"));
+	_enemies.push_back(new EnemyShip(136, 84, glm::vec2(200, 100), "Images/naves/spaceShips_005.png"));
+	_enemies.push_back(new EnemyShip(136, 84, glm::vec2(200, 200), "Images/naves/spaceShips_005.png"));
 	_window.create("Engine", _witdh, _height, 0);
 	glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
 	initLevel();
@@ -61,6 +65,12 @@ void MainGame::draw() {
 
 	_spriteBacth.begin();
 	background->draw(_spriteBacth);
+	_ship->draw(_spriteBacth);
+
+	for (size_t i = 0; i < _enemies.size(); i++)
+	{
+		_enemies[i]->draw(_spriteBacth);
+	}
 
 	_spriteBacth.end();
 	_spriteBacth.renderBatch();

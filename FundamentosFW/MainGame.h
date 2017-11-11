@@ -7,13 +7,10 @@
 #include <vector>
 #include "SpriteBacth.h"
 #include "InputManager.h"
-#include "Bullet.h"
-#include "Level.h"
-#include "Player.h"
-#include "Human.h"
-#include "Zombie.h"
 #include "Timing.h"
 #include "Background.h"
+#include "Ship.h"
+#include "EnemyShip.h"
 
 enum class GameState
 {
@@ -35,15 +32,11 @@ private:
 	Camera2D _camera;
 	SpriteBacth _spriteBacth;
 	InputManager _inputManager;
-	vector<Bullet> _bullets;
-	vector<Level*> _levels;
-	vector<Human*>  _humans;
-	vector<Zombie*> _zombies;
 	FpsLimiter _fpsLimiter;
+	Ship* _ship;
+	vector<EnemyShip*> _enemies;
 	void gameLoop();
 	float _previusTicks;
-	Player* _player;
-	int _currenLevel;
 	void initLevel();
 	void updateAgents(float deltaTime);
 	

@@ -67,7 +67,7 @@ void MenuScreen::onEntry() {
 	initSystem();
 	_spriteBacth.init();
 	_camera2D.init(_window->getScreenWidth(), _window->getScreenHeight());
-	_background = new Background("hola");
+	//_background = new Background("hola");
 	_camera2D.setPosition(glm::vec2(400, 300));
 }
 

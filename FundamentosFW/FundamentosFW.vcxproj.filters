@@ -28,9 +28,6 @@
     <Filter Include="Source Files\Core">
       <UniqueIdentifier>{e8190f3e-c6ee-443d-8558-b9e43a8f59a5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Screens">
-      <UniqueIdentifier>{e1aa2282-ae1a-44d1-8cb0-1dbef40934d7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Game">
       <UniqueIdentifier>{fdadd624-ab1f-47b7-bb97-a16ae299343a}</UniqueIdentifier>
     </Filter>
@@ -129,6 +126,12 @@
     <ClInclude Include="GamePlayScreen.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
+    <ClInclude Include="ScreenIndices.h">
+      <Filter>Header Files\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainGame.cpp">
@@ -203,9 +206,6 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="IGameScreen.cpp">
-      <Filter>Source Files\Screens</Filter>
-    </ClCompile>
     <ClCompile Include="ScreenList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -217,6 +217,9 @@
     </ClCompile>
     <ClCompile Include="GamePlayScreen.cpp">
       <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

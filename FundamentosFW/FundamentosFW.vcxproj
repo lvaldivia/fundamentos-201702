@@ -119,6 +119,7 @@
   <ItemGroup>
     <ClInclude Include="Agent.h" />
     <ClInclude Include="App.h" />
+    <ClInclude Include="Background.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="Engine.h" />
@@ -139,6 +140,7 @@
     <ClInclude Include="picoPNG.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="ScreenIndices.h" />
     <ClInclude Include="ScreenList.h" />
     <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="TextureCache.h" />
@@ -151,6 +153,7 @@
   <ItemGroup>
     <ClCompile Include="Agent.cpp" />
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="Engine.cpp" />
@@ -160,7 +163,6 @@
     <ClCompile Include="GLS_Program.cpp" />
     <ClCompile Include="Gun.cpp" />
     <ClCompile Include="Human.cpp" />
-    <ClCompile Include="IGameScreen.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="IOManager.cpp" />

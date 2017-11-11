@@ -14,7 +14,8 @@ bool Game::init() {
 			SDL_GL_ACCELERATED_VISUAL,1
 	);
 	initSystems();
-	onInit();
+	onInit(); 
+	_isRunning = true;
 	addScreens();
 	_currentScreen = _screenList->getCurrent();
 	_currentScreen->onEntry();

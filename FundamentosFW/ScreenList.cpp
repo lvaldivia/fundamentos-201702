@@ -20,7 +20,7 @@ void ScreenList::addScreen(IGameScreen* newScreen) {
 void ScreenList::destroy() {
 	for (size_t i = 0; i < _screens.size(); i++)
 	{
-		_screens[i]->desctroy();
+		_screens[i]->destroy();
 	}
 	_currentIndex = -1;
 	_screens.resize(0);

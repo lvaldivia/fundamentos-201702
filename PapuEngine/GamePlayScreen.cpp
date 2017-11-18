@@ -46,7 +46,7 @@ void GamePlayScreen::onEntry() {
 			_window->getScreenHeight() / 2.0f));
 	
 	_background = new Background("Textures/naves/game.png");
-	_ship = new Ship(106, 79, glm::vec2(_window->getScreenWidth() / 2.0f, 100), "Textures/naves/Player.png",_game->_inputManager);
+	_ship = new Ship(106, 79, glm::vec2(_window->getScreenWidth() / 2.0f, 100), "Textures/naves/Player.png",&_game->_inputManager);
 
 	_hudCamera.init(_window->getScreenWidth(),
 		_window->getScreenHeight());

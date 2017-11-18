@@ -4,7 +4,7 @@
 class Ship :public Agent
 {
 private:
-	InputManager _inputManager;
+	InputManager* _inputManager;
 public:
 	Ship(float agent_width, 
 		float agent_height, 
@@ -14,7 +14,7 @@ public:
 		float agent_height, 
 		glm::vec2 position,
 		std::string texture, 
-		InputManager& inputManager);
+		InputManager* inputManager);
 	void update(float deltaTime);
 	~Ship();
 };

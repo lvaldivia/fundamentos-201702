@@ -19,9 +19,13 @@ public:
 	virtual void onExit() = 0;
 	InputManager _inputManager;
 	void onSDLEvent(SDL_Event& event);
+	const float getFps()const {
+		return _fps;
+	}
 
 protected:
 	bool init();
+	float _fps = 0.0f;
 	void update();
 	void draw();
 	bool initSystems();

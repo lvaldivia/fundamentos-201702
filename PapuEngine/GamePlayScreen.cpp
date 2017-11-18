@@ -1,9 +1,10 @@
 #include "GamePlayScreen.h"
 #include "Game.h"
 #include "ScreenIndices.h"
-
+#include <iostream>
 #include "ResourceManager.h"
 #include <random>
+#include <ctime>
 
 
 bool GamePlayScreen::onExitClicked()
@@ -13,7 +14,7 @@ bool GamePlayScreen::onExitClicked()
 }
 
 GamePlayScreen::GamePlayScreen(Window* window):
-	_window(window)
+	_window(window),_bullet(0),_score(0)
 {
 	_screenIndex = SCREEN_INDEX_GAMEPLAY;
 }
@@ -46,7 +47,8 @@ void GamePlayScreen::onEntry() {
 			_window->getScreenHeight() / 2.0f));
 	
 	_background = new Background("Textures/naves/game.png");
-	_ship = new Ship(106, 79, glm::vec2(_window->getScreenWidth() / 2.0f, 100), "Textures/naves/Player.png",&_game->_inputManager);
+	_ship = new Ship(53, 39
+		, glm::vec2(_window->getScreenWidth() / 2.0f, 100), "Textures/naves/Player.png",&_game->_inputManager);
 
 	_hudCamera.init(_window->getScreenWidth(),
 		_window->getScreenHeight());
@@ -82,6 +84,17 @@ void GamePlayScreen::draw() {
 
 	_ship->draw(_spriteBatch);
 	_background->draw(_spriteBatch);
+
+	for (size_t i = 0; i < _enemies.size(); i++)
+	{
+		_enemies[i]->draw(_spriteBatch);
+	}
+
+	for (size_t i = 0; i < _bullets.size(); i++)
+	{
+		_bullets[i]->draw(_spriteBatch);
+	}
+
 	_spriteBatch.end();
 	_spriteBatch.renderBatch();
 
@@ -93,10 +106,36 @@ void GamePlayScreen::draw() {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 void GamePlayScreen::update() {
+	const float MS_PER_SECOND = 1000;
+	const float DESIRED_FRAMETIME = MS_PER_SECOND / _game->getFps();
+	float previuosTime = SDL_GetTicks();
+	float newTime = SDL_GetTicks();
+	float frameTime = newTime - previuosTime;
+	previuosTime = newTime;
+	float totalDeltaTime = frameTime / DESIRED_FRAMETIME;
+
 	_camera2d.update();
 	_hudCamera.update();
-	_ship->update(1.0f);
+	_ship->update(0.01);
 	checkInput();
+	_elapsed += 0.1f;
+	if (_elapsed >= 0.1f) {
+		_elapsed = 0;
+		std::mt19937 randomEngine;
+		randomEngine.seed(time(nullptr));
+		std::uniform_real_distribution<float>
+			randX(0, _window->getScreenWidth());
+		_enemies.push_back(new EnemyShip(55, 37, glm::vec2(
+			randX(randomEngine), 800),
+			"Textures/naves/spaceShips_001.png"));
+	}
+	for (size_t i = 0; i < _enemies.size(); i++)
+	{
+		_enemies[i]->update(0.1f);
+	}
+	if (_game->_inputManager.isKeyDown(SDLK_f)) {
+		_bullets.push_back(new Vullet("Textures/naves/spaceMissiles_001.png", _ship->getPosition()));
+	}
 }
 
 void  GamePlayScreen::drawHUD() {

@@ -10,6 +10,7 @@ EnemyShip::EnemyShip(float agent_width, float agent_height, glm::vec2 position, 
 
 void EnemyShip::update(float deltaTime) {
 	_elapsed += deltaTime;
+	_position.y -= 5;
 }
 
 

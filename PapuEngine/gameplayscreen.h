@@ -11,6 +11,8 @@
 #include "SpriteFont.h"
 #include "Background.h"
 #include "Ship.h"
+#include "EnemyShip.h"
+#include "Vullet.h"
 
 class GamePlayScreen : public IGameScreen
 {
@@ -22,11 +24,15 @@ private:
 	Ship* _ship;
 	SpriteBacth _spriteBatch;
 	GLTexture _texture;
+	vector<Vullet*> _bullets;
 	SpriteFont* _spriteFont;
 	Camera2D _hudCamera;
 	SpriteBacth _hudBatch;
+	float _elapsed;
+	int _score;
+	int _bullet;
 	void drawHUD();
-
+	vector<EnemyShip*> _enemies;
 public:
 	GamePlayScreen(Window* window);
 	~GamePlayScreen();

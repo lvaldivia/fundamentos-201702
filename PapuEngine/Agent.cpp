@@ -14,8 +14,11 @@ Agent::Agent(float agent_width, float agent_height, glm::vec2 position, std::str
 void Agent::draw(SpriteBacth& spritebatch) {
 	_texture_id = ResourceManager::getTexture(_texturePath).id;
 	const glm::vec4 uvRect(0.0f, 0.0f, 1.0f, 1.0f);
+	ColorRGBA  color;
+	color.set(255, 255, 255, 255);
 	glm::vec4 destRect(_position.x, _position.y, _agent_width, _agent_height);
 	spritebatch.draw(destRect, uvRect, _texture_id, 0.0f, color);
+
 }
 
 bool Agent::collideWithLevel(const std::vector<std::string>& levelData) {

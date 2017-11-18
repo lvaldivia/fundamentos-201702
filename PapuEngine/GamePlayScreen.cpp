@@ -18,34 +18,35 @@ GamePlayScreen::GamePlayScreen(Window* window):
 	_screenIndex = SCREEN_INDEX_GAMEPLAY;
 }
 
-
 GamePlayScreen::~GamePlayScreen()
 {
 }
 
-
 void GamePlayScreen::build() {
 
 }
+
 void GamePlayScreen::destroy() {
 
 }
+
 void GamePlayScreen::onExit() {
 }
 
 void GamePlayScreen::onEntry() {
 	initWorld();
-
 	initSystem();
-
 	_spriteBatch.init();
 	_hudBatch.init();
-
 	initGUI();
-
 	_camera2d.init(_window->getScreenWidth(),
 		_window->getScreenHeight());
-	_camera2d.setScale(32.0f);
+	_camera2d.setPosition(
+		glm::vec2(_window->getScreenWidth() / 2.0f,
+			_window->getScreenHeight() / 2.0f));
+	
+	_background = new Background("Textures/naves/game.png");
+	_ship = new Ship(106, 79, glm::vec2(_window->getScreenWidth() / 2.0f, 100), "Textures/naves/Player.png",_game->_inputManager);
 
 	_hudCamera.init(_window->getScreenWidth(),
 		_window->getScreenHeight());
@@ -79,7 +80,8 @@ void GamePlayScreen::draw() {
 	glUniform1i(imageLocation, 0);
 	_spriteBatch.begin();
 
-
+	_ship->draw(_spriteBatch);
+	_background->draw(_spriteBatch);
 	_spriteBatch.end();
 	_spriteBatch.renderBatch();
 
@@ -93,6 +95,7 @@ void GamePlayScreen::draw() {
 void GamePlayScreen::update() {
 	_camera2d.update();
 	_hudCamera.update();
+	_ship->update(1.0f);
 	checkInput();
 }
 
@@ -106,10 +109,10 @@ void  GamePlayScreen::drawHUD() {
 	char buffer[256];
 
 	_hudBatch.begin();
-	sprintf_s(buffer, " HOLA %d", 10);
+	sprintf_s(buffer, " BULLETS %d", 10);
 	_spriteFont->draw(_hudBatch, buffer, glm::vec2(0, 0),
 		glm::vec2(0.5), 0.0f, ColorRGBA(255, 255, 255, 255));
-	sprintf_s(buffer, " HOLA2 %d", 10);
+	sprintf_s(buffer, " SCORE %d", 10);
 	_spriteFont->draw(_hudBatch, buffer, glm::vec2(0, 36),
 		glm::vec2(0.5), 0.0f, ColorRGBA(255, 255, 255, 255));
 	_hudBatch.end();

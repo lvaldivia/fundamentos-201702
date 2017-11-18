@@ -7,6 +7,7 @@ class Background
 {
 private:
 	std::string _texture;
+	int _textureID;
 public:
 	void draw(SpriteBacth& spritebatch);
 	Background(std::string texture);

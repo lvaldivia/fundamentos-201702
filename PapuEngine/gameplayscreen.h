@@ -9,13 +9,17 @@
 #include "SpriteBacth.h"
 #include <vector>
 #include "SpriteFont.h"
+#include "Background.h"
+#include "Ship.h"
 
 class GamePlayScreen : public IGameScreen
 {
 private:
 	GLS_Program _program;
 	Camera2D _camera2d;
+	Background* _background;
 	Window* _window = nullptr;
+	Ship* _ship;
 	SpriteBacth _spriteBatch;
 	GLTexture _texture;
 	SpriteFont* _spriteFont;

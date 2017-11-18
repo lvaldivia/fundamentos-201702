@@ -11,11 +11,13 @@ class MenuScreen : public IGameScreen
 {
 private:
 	Window* _window = nullptr;
+	bool btnGameClicked;
 	GLS_Program _program;
 	SpriteBacth _spriteBacth;
 	Camera2D _camera2D;
 	Background* _background;
 	Button* _button;
+
 public:
 	MenuScreen(Window* window);
 	virtual void build() override;

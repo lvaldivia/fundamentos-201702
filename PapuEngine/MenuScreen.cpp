@@ -1,9 +1,10 @@
 #include "MenuScreen.h"
 #include "ScreenIndices.h"
 #include "Game.h"
+#include <iostream>
 
 MenuScreen::MenuScreen(Window* window) :
-	_window(window)
+	_window(window), btnGameClicked(false)
 {
 	_screenIndex = SCREEN_INDEX_MENU;
 }
@@ -25,14 +26,19 @@ MenuScreen::~MenuScreen()
 {
 }
 
-void MenuScreen::build() {
+void MenuScreen::build() 
+{
+}
 
-}
 void MenuScreen::destroy() {
+	delete _background;
+	delete _button;
 }
+
 void MenuScreen::onExit() {
 
 }
+
 void MenuScreen::onEntry() {
 	initSystem();
 	_camera2D.init(_window->getScreenWidth(), _window->getScreenHeight());
@@ -41,10 +47,20 @@ void MenuScreen::onEntry() {
 	_background = new Background("Textures/naves/menu.png");
 	_button = new Button("Textures/naves/menu_button.png");
 }
+
 void MenuScreen::update() {
 	_camera2D.update();
+	if (_game->_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
+		if (_button->clicked(_game->_inputManager.getMouseCoords()) && !btnGameClicked) {
+			btnGameClicked = true;
+			std::cout << "Button clicked" << std::endl;
+			_currentState = ScreenState::CHANGE_NEXT;
+
+		}
+	}
 	checkInput();
 }
+
 void MenuScreen::draw() {
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -70,12 +86,15 @@ void MenuScreen::draw() {
 	glBindTexture(GL_TEXTURE_2D, 0);
 	_program.unuse();
 }
+
 int MenuScreen::getNextScreen()const {
 	return SCREEN_INDEX_GAMEPLAY;
 }
+
 int MenuScreen::getPreviousScreen() const{
 	return SCREEN_INDEX_NO_SCREEN;
 }
+
 void MenuScreen::checkInput() {
 	SDL_Event evnt;
 	while (SDL_PollEvent(&evnt)) {

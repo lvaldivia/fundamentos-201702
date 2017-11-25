@@ -12,6 +12,7 @@ class Game
 public:
 	Game();
 	virtual ~Game();
+	float _fps;
 	void run();
 	void exit();
 	virtual void onInit() = 0;

@@ -2,6 +2,7 @@
 #include "PapuEngine.h"
 #include "ScreenList.h"
 #include "IGameScreen.h"
+#include "Timing.h"
 
 Game::Game()
 {
@@ -60,12 +61,18 @@ void Game::onSDLEvent(SDL_Event& evnt) {
 
 void Game::run() {
 	if (!init()) return;
+	FpsLimiter limiter;
+	limiter.setMaxFPS(60.0f);
 	_isRunning = true;
 	while (_isRunning) {
+		limiter.begin();
 		_inputManager.update();
 		update();
-		draw();
-		_window.swapBuffer();
+		if (_isRunning) {
+			_fps = limiter.end();
+			draw();
+			_window.swapBuffer();
+		}
 	}
 }
 

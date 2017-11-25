@@ -13,6 +13,7 @@
 #include "Ship.h"
 #include "EnemyShip.h"
 #include "Vullet.h"
+#include "AudioEngine.h"
 
 class GamePlayScreen : public IGameScreen
 {
@@ -30,6 +31,7 @@ private:
 	SpriteBacth _hudBatch;
 	float _elapsed;
 	int _score;
+	AudioEngine _audioEngine; 
 	int _bullet;
 	void drawHUD();
 	vector<EnemyShip*> _enemies;

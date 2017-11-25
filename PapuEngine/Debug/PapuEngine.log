@@ -1,8 +1,21 @@
-﻿  GamePlayScreen.cpp
-c:\users\proyecto\documents\funda\papuengine\gameplayscreen.cpp(111): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
-c:\users\proyecto\documents\funda\papuengine\gameplayscreen.cpp(112): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
-c:\users\proyecto\documents\funda\papuengine\gameplayscreen.cpp(119): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\proyecto\documents\funda\papuengine\gameplayscreen.cpp(125): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\proyecto\documents\funda\papuengine\gameplayscreen.cpp(127): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  PapuEngine.vcxproj -> C:\Users\Proyecto\Documents\funda\Debug\PapuEngine.exe
-  PapuEngine.vcxproj -> C:\Users\Proyecto\Documents\funda\Debug\PapuEngine.pdb (Partial PDB)
+﻿  App.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  main.cpp
+  GamePlayScreen.cpp
+  AudioEngine.cpp
+AudioEngine.obj : error LNK2019: unresolved external symbol _Mix_Init referenced in function "public: void __thiscall AudioEngine::init(void)" (?init@AudioEngine@@QAEXXZ)
+AudioEngine.obj : error LNK2019: unresolved external symbol _Mix_Quit referenced in function "public: void __thiscall AudioEngine::destroy(void)" (?destroy@AudioEngine@@QAEXXZ)
+AudioEngine.obj : error LNK2019: unresolved external symbol _Mix_OpenAudio referenced in function "public: void __thiscall AudioEngine::init(void)" (?init@AudioEngine@@QAEXXZ)
+AudioEngine.obj : error LNK2019: unresolved external symbol _Mix_LoadWAV_RW referenced in function "public: class SoundEffect __thiscall AudioEngine::loadSoundEffect(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (?loadSoundEffect@AudioEngine@@QAE?AVSoundEffect@@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+AudioEngine.obj : error LNK2019: unresolved external symbol _Mix_LoadMUS referenced in function "public: class Music __thiscall AudioEngine::loadMusic(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (?loadMusic@AudioEngine@@QAE?AVMusic@@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+AudioEngine.obj : error LNK2019: unresolved external symbol _Mix_FreeChunk referenced in function "public: void __thiscall AudioEngine::destroy(void)" (?destroy@AudioEngine@@QAEXXZ)
+AudioEngine.obj : error LNK2019: unresolved external symbol _Mix_FreeMusic referenced in function "public: void __thiscall AudioEngine::destroy(void)" (?destroy@AudioEngine@@QAEXXZ)
+AudioEngine.obj : error LNK2019: unresolved external symbol _Mix_PlayChannelTimed referenced in function "public: void __thiscall SoundEffect::play(int)" (?play@SoundEffect@@QAEXH@Z)
+AudioEngine.obj : error LNK2019: unresolved external symbol _Mix_PlayMusic referenced in function "public: void __thiscall Music::play(int)" (?play@Music@@QAEXH@Z)
+AudioEngine.obj : error LNK2019: unresolved external symbol _Mix_HaltMusic referenced in function "public: static void __cdecl Music::stop(void)" (?stop@Music@@SAXXZ)
+AudioEngine.obj : error LNK2019: unresolved external symbol _Mix_PauseMusic referenced in function "public: static void __cdecl Music::pause(void)" (?pause@Music@@SAXXZ)
+AudioEngine.obj : error LNK2019: unresolved external symbol _Mix_ResumeMusic referenced in function "public: static void __cdecl Music::resume(void)" (?resume@Music@@SAXXZ)
+AudioEngine.obj : error LNK2019: unresolved external symbol _Mix_CloseAudio referenced in function "public: void __thiscall AudioEngine::destroy(void)" (?destroy@AudioEngine@@QAEXXZ)
+C:\Users\Proyecto\Documents\funda\depts/lib/SDL2_mixer.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'X86'
+C:\Users\Proyecto\Documents\funda\Debug\PapuEngine.exe : fatal error LNK1120: 13 unresolved externals

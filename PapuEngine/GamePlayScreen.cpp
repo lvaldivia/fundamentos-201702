@@ -37,6 +37,8 @@ void GamePlayScreen::onExit() {
 void GamePlayScreen::onEntry() {
 	initWorld();
 	initSystem();
+	_audioEngine.init();
+	_audioEngine.loadMusic("Sounds/background.mp3");
 	_spriteBatch.init();
 	_hudBatch.init();
 	initGUI();
